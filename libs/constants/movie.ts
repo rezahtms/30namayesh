@@ -1,0 +1,96 @@
+// libs/constants/movies.ts
+
+import { Movie } from "../types/movie";
+
+export const movies: Movie[] = [
+  {
+    id: 1,
+    title: "The Shawshank Redemption",
+    image: "https://picsum.photos/id/1/400/600",
+    rating: 9.3,
+    duration: "۱۴۲ دقیقه",
+    year: 1994,
+    director: "Frank Darabont",
+    actors: [
+      { id: 1, name: "Tim Robbins", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=tim" },
+      { id: 2, name: "Morgan Freeman", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=morgan" },
+    ],
+    genre: ["درام", "جنایی"],
+    summary: "یک بانکدار به نام اندی دوفرین به اشتباه به قتل همسرش متهم می‌شود و به زندان شاوشنک فرستاده می‌شود. او در آنجا با رد، یک زندانی قدیمی، دوست می‌شود و با حفظ امید و پشتکار، مسیر زندگی خود و دیگران را تغییر می‌دهد.",
+  },
+  {
+    id: 2,
+    title: "The Godfather",
+    image: "https://picsum.photos/id/2/400/600",
+    rating: 9.2,
+    duration: "۱۷۵ دقیقه",
+    year: 1972,
+    director: "Francis Ford Coppola",
+    actors: [
+      { id: 3, name: "Marlon Brando", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=marlon" },
+      { id: 4, name: "Al Pacino", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=al" },
+    ],
+    genre: ["درام", "جنایی"],
+    summary: "داستان حماسی خانواده کورلئونه به رهبری ویتو کورلئونه، یکی از قدرتمندترین مافیاهای نیویورک. وقتی ویتو هدف سوءقصد قرار می‌گیرد، پسرش مایکل وارد دنیای جرم و جنایت می‌شود و سرنوشت خانواده را تغییر می‌دهد.",
+  },
+  {
+    id: 3,
+    title: "The Dark Knight",
+    image: "https://picsum.photos/id/3/400/600",
+    rating: 9.0,
+    duration: "۱۵۲ دقیقه",
+    year: 2008,
+    director: "Christopher Nolan",
+    actors: [
+      { id: 5, name: "Christian Bale", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=christian" },
+      { id: 6, name: "Heath Ledger", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=heath" },
+    ],
+    genre: ["اکشن", "جنایی", "درام"],
+    summary: "بتمن با کمک ستوان گوردون و دادستان هاروی دنت، با جرم و جنایت در گاتهام مبارزه می‌کند. اما ظهور جوکر، یک نابغه جنایتکار، همه چیز را به هرج و مرج می‌کشاند و بتمن را مجبور به انتخاب‌های دشوار می‌کند.",
+  },
+  {
+    id: 4,
+    title: "Pulp Fiction",
+    image: "https://picsum.photos/id/4/400/600",
+    rating: 8.9,
+    duration: "۱۵۴ دقیقه",
+    year: 1994,
+    director: "Quentin Tarantino",
+    actors: [
+      { id: 7, name: "John Travolta", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=john" },
+      { id: 8, name: "Samuel L. Jackson", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=samuel" },
+    ],
+    genre: ["جنایی", "درام"],
+    summary: "چهار داستان درهم تنیده از خلافکاران لس آنجلس: دو قاتل حرفه‌ای، یک بوکسور خیانتکار، همسر یک گانگستر و یک زوج سارق. سرنوشت این شخصیت‌ها به شکلی غیرمنتظره و طنزآمیز به هم گره می‌خورد.",
+  },
+  {
+    id: 5,
+    title: "Inception",
+    image: "https://picsum.photos/id/5/400/600",
+    rating: 8.8,
+    duration: "۱۴۸ دقیقه",
+    year: 2010,
+    director: "Christopher Nolan",
+    actors: [
+      { id: 9, name: "Leonardo DiCaprio", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=leonardo" },
+      { id: 10, name: "Joseph Gordon-Levitt", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=joseph" },
+    ],
+    genre: ["اکشن", "علمی تخیلی"],
+    summary: "دام کاب، یک دزد ماهر در استخراج اسرار از ناخودآگاه افراد، آخرین مأموریت خود را می‌پذیرد: کاشتن یک ایده در ذهن یک میلیاردر. اما این بار باید به عمیق‌ترین لایه‌های رویا نفوذ کند، جایی که مرز بین واقعیت و خیال محو می‌شود.",
+  },
+  {
+    id: 6,
+    title: "Interstellar",
+    image: "https://picsum.photos/id/6/400/600",
+    rating: 8.7,
+    duration: "۱۶۹ دقیقه",
+    year: 2014,
+    director: "Christopher Nolan",
+    actors: [
+      { id: 11, name: "Matthew McConaughey", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=matthew" },
+      { id: 12, name: "Anne Hathaway", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=anne" },
+    ],
+    genre: ["علمی تخیلی", "درام"],
+    summary: "در آینده‌ای نزدیک، زمین در حال نابودی است. کوپر، خلبان سابق ناسا، مأموریتی خطرناک را می‌پذیرد: سفری میان‌ستاره‌ای برای یافتن سیاره‌ای قابل سکونت. او باید بین نجات بشریت و بازگشت به سوی خانواده‌اش یکی را انتخاب کند.",
+  },
+];
