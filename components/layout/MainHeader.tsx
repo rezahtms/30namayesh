@@ -1,28 +1,10 @@
 "use client";
 
-import {
-  Clapperboard,
-  Film,
-  Home,
-  Info,
-  Menu,
-  Newspaper,
-  Tv,
-  Users,
-  X,
-} from "lucide-react";
+import { navLinks } from "@/libs/constants/header";
+import { Film, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-const navLinks = [
-  { href: "/", label: "خانه", icon: Home },
-  { href: "/movies", label: "فیلم‌ها", icon: Clapperboard },
-  { href: "/series", label: "سریال‌ها", icon: Tv },
-  { href: "/actors", label: "بازیگران", icon: Users },
-  { href: "/blog", label: "وبلاگ", icon: Newspaper },
-  { href: "/about", label: "درباره ما", icon: Info },
-];
 
 export default function MainHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -84,7 +66,7 @@ export default function MainHeader() {
         </div>
       </div>
 
-      <nav className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="relative max-w-1/2 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
