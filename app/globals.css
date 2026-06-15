@@ -73,3 +73,7 @@ body::after {
     transparent 70%
   );
 }
+
+* {
+  list-style: none;
+}

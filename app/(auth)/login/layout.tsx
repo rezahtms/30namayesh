@@ -1,14 +1,9 @@
-import MainHeader from "@/components/layout/MainHeader";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <MainHeader />
-      {children}
-    </>
+    <div className="flex items-center justify-center h-screen">{children}</div>
   );
 }
