@@ -91,7 +91,7 @@ export function WatchedMovieList() {
         </button>
       </div>
 
-      <div className="space-y-3 sm:space-y-4">
+      <div className="grid grid-cols-1 gap-3 items-stretch sm:grid-cols-2  ">
         {watchedMovies.map((item, index) => (
           <div
             key={item.movie.id}
