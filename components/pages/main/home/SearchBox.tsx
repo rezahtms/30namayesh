@@ -44,6 +44,18 @@ function SearchBox() {
     [router, pathname, searchParams],
   );
 
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setSearchValue(value);
+
+      if (value.trim() === "") {
+        updateUrlParams("");
+      }
+    },
+    [updateUrlParams],
+  );
+
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -54,8 +66,9 @@ function SearchBox() {
 
   const handleClearInput = useCallback(() => {
     setSearchValue("");
+    updateUrlParams("");
     inputRef.current?.focus();
-  }, []);
+  }, [updateUrlParams]);
 
   const handleClearAll = useCallback(() => {
     setSearchValue("");
@@ -108,7 +121,7 @@ function SearchBox() {
             type="search"
             name="film-search"
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={handleChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onKeyDown={handleKeyDown}

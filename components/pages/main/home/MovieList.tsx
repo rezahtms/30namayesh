@@ -1,9 +1,10 @@
 "use client";
 
 import type { Movie } from "@/libs/types/movie";
-import { Clapperboard } from "lucide-react";
+import { Clapperboard, Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { AddMovieModal } from "./AddMovieModal";
 import { MovieCard } from "./MovieCard";
 
 function MovieListContent() {
@@ -12,52 +13,58 @@ function MovieListContent() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const fetchMovies = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const url = filmName
+        ? `/api/movies?filmName=${encodeURIComponent(filmName)}`
+        : "/api/movies";
+      const response = await fetch(url);
+      const result = await response.json();
+      if (!response.ok)
+        throw new Error(result.error || "خطا در دریافت فیلم‌ها");
+      setMovies(result.data);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [filmName]);
 
   useEffect(() => {
-    async function fetchMovies() {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const url = filmName
-          ? `/api/movies?filmName=${encodeURIComponent(filmName)}`
-          : "/api/movies";
-
-        const response = await fetch(url);
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || "خطا در دریافت فیلم‌ها");
-        }
-
-        setMovies(result.data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     fetchMovies();
-  }, [filmName]);
+  }, [fetchMovies]);
 
   return (
     <section
       aria-label="لیست فیلم‌ها"
       className="w-full space-y-8 sm:space-y-10"
     >
-      <div className="flex items-center gap-3">
-        <div className="p-2 bg-gradient-to-br from-amber-400/10 to-red-500/10 rounded-xl border border-white/[0.05]">
-          <Clapperboard className="h-5 w-5 text-red-400" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-gradient-to-br from-amber-400/10 to-red-500/10 rounded-xl border border-white/[0.05]">
+            <Clapperboard className="h-5 w-5 text-red-400" />
+          </div>
+          <div>
+            <h2 className="text-white font-bold text-lg sm:text-xl">
+              همه فیلم‌ها
+            </h2>
+            <p className="text-gray-500 text-xs sm:text-sm">
+              {movies.length} فیلم
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-white font-bold text-lg sm:text-xl">
-            همه فیلم‌ها
-          </h2>
-          <p className="text-gray-500 text-xs sm:text-sm">
-            {movies.length} فیلم
-          </p>
-        </div>
+
+        <button
+          onClick={() => setModalOpen(true)}
+          className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-xl transition-all duration-300 shadow-lg shadow-indigo-600/20"
+        >
+          <Plus className="h-4 w-4" />
+          افزودن فیلم
+        </button>
       </div>
 
       {loading && (
@@ -92,7 +99,7 @@ function MovieListContent() {
 
       {!loading && !error && movies.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-gray-500 text-sm">فیلمی با این نام یافت نشد</p>
+          <p className="text-gray-500 text-sm">فیلمی یافت نشد</p>
         </div>
       )}
 
@@ -109,6 +116,12 @@ function MovieListContent() {
           ))}
         </div>
       )}
+
+      <AddMovieModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSuccess={fetchMovies}
+      />
     </section>
   );
 }
@@ -118,15 +131,17 @@ export function MovieList() {
     <Suspense
       fallback={
         <div className="w-full space-y-8 sm:space-y-10">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-amber-400/10 to-red-500/10 rounded-xl border border-white/[0.05]">
-              <Clapperboard className="h-5 w-5 text-red-400" />
-            </div>
-            <div>
-              <h2 className="text-white font-bold text-lg sm:text-xl">
-                همه فیلم‌ها
-              </h2>
-              <p className="text-gray-500 text-xs sm:text-sm">...</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-to-br from-amber-400/10 to-red-500/10 rounded-xl border border-white/[0.05]">
+                <Clapperboard className="h-5 w-5 text-red-400" />
+              </div>
+              <div>
+                <h2 className="text-white font-bold text-lg sm:text-xl">
+                  همه فیلم‌ها
+                </h2>
+                <p className="text-gray-500 text-xs sm:text-sm">...</p>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
