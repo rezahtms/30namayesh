@@ -1,9 +1,9 @@
 "use client";
 
 import { navLinks } from "@/libs/constants/header";
-import { Film, Menu, X } from "lucide-react";
+import { Film, LogOut, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function MainHeader() {
@@ -11,6 +11,15 @@ export default function MainHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
+
+  // 🆕 تابع خروج
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    document.cookie = "token=; path=/; max-age=0";
+    router.push("/login");
+  };
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 10);
@@ -125,7 +134,16 @@ export default function MainHeader() {
             })}
           </div>
 
+          {/* 🆕 دکمه خروج - دسکتاپ */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={handleLogout}
+              className="hidden lg:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-300"
+            >
+              <LogOut className="h-4 w-4" strokeWidth={2} />
+              <span>خروج</span>
+            </button>
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden relative p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/[0.05] transition-all duration-200 group"
@@ -208,6 +226,20 @@ export default function MainHeader() {
                 </Link>
               );
             })}
+          </div>
+
+          {/* 🆕 دکمه خروج - موبایل */}
+          <div className="pt-4 border-t border-white/[0.06]">
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                handleLogout();
+              }}
+              className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-200"
+            >
+              <LogOut className="h-4 w-4" strokeWidth={2} />
+              خروج از حساب
+            </button>
           </div>
         </div>
       </div>
